@@ -7,21 +7,13 @@
 //
 
 import UIKit
-import SWXMLHash
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let url = URL(string: "http://fairmont.lanoosphere.com/mobile/getdata?lang=en") {
-            if let data = try? Data(contentsOf: url) {
-                let xml = SWXMLHash.parse(data)
-                for event in xml["data"]["categories"] {
-                    
-                }
-            }
-        }
+        
 
     }
 

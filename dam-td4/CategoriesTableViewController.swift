@@ -7,17 +7,60 @@
 //
 
 import UIKit
+import SWXMLHash
+
+struct Element {
+    var id: Int
+    var img: String
+    var name: String
+    var id_category: Int
+}
+
+struct Category {
+    var id: Int
+    var name: String
+    var elements = [Element]()
+}
 
 class CategoriesTableViewController: UITableViewController {
+    
+    var categories = [Category]() // tableau de catégories
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let url = URL(string: "http://fairmont.lanoosphere.com/mobile/getdata?lang=en") {
+            if let data = try? Data(contentsOf: url) {
+                let xml = SWXMLHash.parse(data)
+                for cat in xml["data"]["categories"]["category"] { // parser les catégories
+                    
+                    //print(category["element"].element?.attribute(by: "id")?.text)
+                    var tmpElement = [Element]()
+                    var category = Category( // création d'un objet catégorie
+                        id: Int((cat.element?.attribute(by: "id")?.text)!)!,
+                        name: (cat.element?.attribute(by: "name")?.text)!,
+                        elements: tmpElement)
+                    
+                    
+                    for elem in cat["element"] { // parser les éléments
+                        let element = Element( // création d'un objet element
+                            id: Int((elem.element?.attribute(by: "id")?.text)!)!,
+                            img: (elem.element?.attribute(by: "image")?.text)!,
+                            name: (elem.element?.attribute(by: "name")?.text)!,
+                            id_category: Int((elem.element?.attribute(by: "category_id")?.text)!)!)
+                        
+                        tmpElement.append(element) // ajoute l'objet element au tableau d'éléments
+                    }
+                    
+                    category.elements = tmpElement
+                    categories.append(category) // ajoute l'objet category au tableau de catégories
+                }
+            }
+        }
+        
+        print(categories[1].elements.count)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,24 +72,24 @@ class CategoriesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return categories.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return categories[section].elements.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         
-        cell.textLabel?.text = "Section \(indexPath.section) Row \(indexPath.row)"
+        cell.textLabel?.text = categories[indexPath.section].elements[indexPath.row].name
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Section \(section)"
+        return categories[section].name
     }
 
     /*
