@@ -9,6 +9,16 @@
 import UIKit
 
 class FormulaireViewController: UIViewController {
+    
+    @IBOutlet weak var nomFormOutlet: UITextField!
+    @IBOutlet weak var prenomFormOutlet: UITextField!
+    @IBOutlet weak var emailFormOutlet: UITextField!
+    @IBOutlet weak var telFormOutlet: UITextField!
+    @IBOutlet weak var rappelerSwitch: UISwitch!
+    
+    @IBAction func envoyerAction(_ sender: Any) {
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

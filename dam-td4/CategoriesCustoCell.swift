@@ -9,6 +9,11 @@
 import UIKit
 
 class CategoriesCustoCell: UITableViewCell {
+    
+    @IBOutlet weak var imageCustom: UIImageView!
+
+    @IBOutlet weak var nomCustom: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

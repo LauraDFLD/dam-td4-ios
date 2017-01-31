@@ -129,10 +129,20 @@
                                 <state key="normal" title="ENVOYER">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="envoyerAction:" destination="cPm-id-rAF" eventType="touchUpInside" id="bja-kE-0li"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.32153362035751343" green="0.32159313559532166" blue="0.32152575254440308" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="emailFormOutlet" destination="Xxa-dd-BoB" id="jNi-kA-yMU"/>
+                        <outlet property="nomFormOutlet" destination="Hig-Cc-kR8" id="AdT-0K-Dbf"/>
+                        <outlet property="prenomFormOutlet" destination="MLd-yn-Xd5" id="Qem-gP-0Py"/>
+                        <outlet property="rappelerSwitch" destination="ZXx-2L-OB8" id="6v5-OA-IHC"/>
+                        <outlet property="telFormOutlet" destination="urs-NB-EZF" id="5R9-u3-tnT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kvu-8N-ser" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -142,7 +152,7 @@
         <scene sceneID="QKC-7l-x0w">
             <objects>
                 <tableViewController id="wkK-31-NYk" customClass="CategoriesTableViewController" customModule="dam_td4" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="NVl-2z-Q2F">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="157" sectionHeaderHeight="28" sectionFooterHeight="28" id="NVl-2z-Q2F">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -157,14 +167,14 @@
                         </navigationBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LabelCell" textLabel="R9r-RS-k4D" style="IBUITableViewCellStyleDefault" id="9Ec-Jr-ga8">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="157"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Ec-Jr-ga8" id="oP3-gT-Wgn">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="156.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R9r-RS-k4D">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="156.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -173,36 +183,54 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="158" id="GiJ-Ve-OIQ">
-                                <rect key="frame" x="0.0" y="116" width="375" height="158"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellCustom" rowHeight="160" id="GiJ-Ve-OIQ" customClass="CategoriesCustoCell" customModule="dam_td4" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="229" width="375" height="160"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GiJ-Ve-OIQ" id="j2h-fT-zcX">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="157"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="159.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MJb-0l-ddY">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJb-0l-ddY">
                                             <rect key="frame" x="0.0" y="0.0" width="309" height="157"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="157" id="0ke-Or-mc3"/>
+                                            </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QY-Ok-ArM">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8QY-Ok-ArM">
                                             <rect key="frame" x="309" y="0.0" width="66" height="157"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.3215336204" green="0.32159313560000002" blue="0.32152575249999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="157" id="KqW-fb-3qf"/>
+                                                <constraint firstAttribute="width" constant="66" id="Tdg-HV-aXL"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="41"/>
                                             <state key="normal" title="&gt;">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="  ELEMENT NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgL-sB-BsF">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="  ELEMENT NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OgL-sB-BsF">
                                             <rect key="frame" x="0.0" y="133" width="309" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29278146404109595" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.43742274925236363" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="MJb-0l-ddY" firstAttribute="leading" secondItem="OgL-sB-BsF" secondAttribute="leading" id="5Vx-EY-Exh"/>
+                                        <constraint firstItem="8QY-Ok-ArM" firstAttribute="top" secondItem="j2h-fT-zcX" secondAttribute="top" id="5rj-w2-swi"/>
+                                        <constraint firstItem="MJb-0l-ddY" firstAttribute="trailing" secondItem="OgL-sB-BsF" secondAttribute="trailing" id="68u-Hz-CUj"/>
+                                        <constraint firstItem="8QY-Ok-ArM" firstAttribute="leading" secondItem="OgL-sB-BsF" secondAttribute="trailing" id="AT2-Vv-JA0"/>
+                                        <constraint firstAttribute="trailing" secondItem="8QY-Ok-ArM" secondAttribute="trailing" id="AY7-Zr-fsP"/>
+                                        <constraint firstItem="MJb-0l-ddY" firstAttribute="leading" secondItem="j2h-fT-zcX" secondAttribute="leading" id="dVo-t5-pXo"/>
+                                        <constraint firstItem="8QY-Ok-ArM" firstAttribute="bottom" secondItem="OgL-sB-BsF" secondAttribute="bottom" id="l3c-Im-gcU"/>
+                                        <constraint firstItem="8QY-Ok-ArM" firstAttribute="top" secondItem="MJb-0l-ddY" secondAttribute="top" id="ttO-J5-QaH"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageCustom" destination="MJb-0l-ddY" id="59O-gw-KUg"/>
+                                    <outlet property="nomCustom" destination="OgL-sB-BsF" id="5dy-ic-O8C"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

@@ -7,6 +7,7 @@ target 'dam-td4' do
 
   # Pods for dam-td4
   pod 'SWXMLHash', '~> 3.0.0'
+  pod 'SDWebImage'
 
 
 end
