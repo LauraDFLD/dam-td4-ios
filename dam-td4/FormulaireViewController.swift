@@ -19,36 +19,37 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
     
     @IBAction func envoyerAction(_ sender: Any) {
         
-        
-        let alertController = UIAlertController(title: "Attention", message:
-            "Vous n'avez pas rempli tous les champs", preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
-        
-        self.present(alertController, animated: true, completion: nil)
-        
+        //Vérification des champs du formulaire
         if (nomFormOutlet.text?.isEmpty)! || (prenomFormOutlet.text?.isEmpty)! || (emailFormOutlet.text?.isEmpty)! || telFormOutlet.text?.isEmpty ?? true {
             
             let alertController = UIAlertController(title: "Attention", message:
                 "Vous n'avez pas rempli tous les champs", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
         }
         else {
+            //Creation de la vue email
             let mailVC = MFMailComposeViewController()
             
+            //Corps du mail
             let messageBody = "Nom:\(nomFormOutlet.text!)\nPrénom:\(prenomFormOutlet.text!)\nEmail:\(emailFormOutlet.text!)\nTéléphone:\(telFormOutlet.text!)\nEtre rappelé:\(rappelerSwitch.isOn) "
             
+            //Ajout des différents champs de l'email
             mailVC.mailComposeDelegate = self
             mailVC.setToRecipients([])
             mailVC.setSubject("Ma demande de contact")
             mailVC.setMessageBody(messageBody, isHTML: false)
             
-            print(messageBody)
+            //print(messageBody)
             
+            //Pour eviter pb emulateur
             if !MFMailComposeViewController.canSendMail() {
                 print("Mail services are not available")
                 return
             }
             else{
+                //Fait apparaitre l'appli mail dans une sous vue
                 present(mailVC, animated: true, completion: nil)
             }
 
@@ -61,19 +62,17 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         
-        //Looks for single or multiple taps.
+        //Reconnait le tap ou doubletap
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FormulaireViewController.dismissKeyboard))
         
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
         
+        //Ajout de la reconnaissance du geste à la vue
         view.addGestureRecognizer(tap)
     }
     
+    //Fonction qui permet de faire disparaitre le clavier
     func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
 
