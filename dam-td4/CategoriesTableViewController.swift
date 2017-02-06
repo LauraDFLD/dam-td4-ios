@@ -117,22 +117,39 @@ class CategoriesTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    /*override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return categories[section].name
-    }
+    }*/
     
     // permet de centrer et personnaliser le header
-    //override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        //let label: UILabel = UILabel()
-        //titleSection. = categories[section].name
+        let rect = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)
+        let footerView = UIView(frame:rect)
+        footerView.backgroundColor = UIColor.white
         
-        //titleSection.textAlignment = NSTextAlignment.center
+        let label: UILabel = UILabel()
+        label.text = categories[section].name
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        
+        label.textAlignment = NSTextAlignment.center
 
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    /*override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let  headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell") as! CategoriesCustoCell
+        headerCell.backgroundColor = UIColor.cyan
         
-        //return titleSection
-    //}
+        headerCell.text = "Europe";
+        
+        return headerCell
+    }*/
     
     // clique sur une cellule
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
