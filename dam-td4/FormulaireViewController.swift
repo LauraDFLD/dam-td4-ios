@@ -33,15 +33,17 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
             let mailVC = MFMailComposeViewController()
             
             //Corps du mail
-            let messageBody = "Nom:\(nomFormOutlet.text!)\nPrénom:\(prenomFormOutlet.text!)\nEmail:\(emailFormOutlet.text!)\nTéléphone:\(telFormOutlet.text!)\nEtre rappelé:\(rappelerSwitch.isOn) "
+            /*let messageBody = "Nom:\(nomFormOutlet.text!)\nPrénom:\(prenomFormOutlet.text!)\nEmail:\(emailFormOutlet.text!)\nTéléphone:\(telFormOutlet.text!)\nEtre rappelé:\(rappelerSwitch.isOn) "*/
+            
+            let messageBody = "<p><b><u>Nom:</u></b>\(nomFormOutlet.text!)<p> <p><b><u>Prénom:</u></b>\(prenomFormOutlet.text!)<p> <p><b><u>Email:</u></b>\(emailFormOutlet.text!)<p> <p><b><u>Téléphone:</u></b>\(telFormOutlet.text!)<p> <p><b><u>Etre rappelé:</u></b>\(rappelerSwitch.isOn)<p>"
             
             //Ajout des différents champs de l'email
             mailVC.mailComposeDelegate = self
             mailVC.setToRecipients([])
             mailVC.setSubject("Ma demande de contact")
-            mailVC.setMessageBody(messageBody, isHTML: false)
+            mailVC.setMessageBody(messageBody, isHTML: true)
             
-            //print(messageBody)
+            print(messageBody)
             
             //Pour eviter pb emulateur
             if !MFMailComposeViewController.canSendMail() {
