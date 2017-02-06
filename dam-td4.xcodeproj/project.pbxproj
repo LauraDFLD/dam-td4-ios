@@ -10,6 +10,7 @@
 		09B14039843E91967BFDE313 /* Pods_dam_td4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9E2182AA9F6B54F9ACD796 /* Pods_dam_td4.framework */; };
 		373CF23D1E3F7E83003AE55C /* FormulaireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CF23C1E3F7E83003AE55C /* FormulaireViewController.swift */; };
 		373CF23F1E3F8D5D003AE55C /* CategoriesCustoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373CF23E1E3F8D5D003AE55C /* CategoriesCustoCell.swift */; };
+		D30917231E46006F00E337FC /* MyWebviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30917221E46006F00E337FC /* MyWebviewController.swift */; };
 		D35445181E3F732100967909 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35445171E3F732100967909 /* CategoriesTableViewController.swift */; };
 		D3AD31A81E3F6B4D000A4441 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD31A71E3F6B4D000A4441 /* AppDelegate.swift */; };
 		D3AD31AA1E3F6B4D000A4441 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD31A91E3F6B4D000A4441 /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 		373CF23C1E3F7E83003AE55C /* FormulaireViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaireViewController.swift; sourceTree = "<group>"; };
 		373CF23E1E3F8D5D003AE55C /* CategoriesCustoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesCustoCell.swift; sourceTree = "<group>"; };
 		6A9E2182AA9F6B54F9ACD796 /* Pods_dam_td4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_dam_td4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D30917221E46006F00E337FC /* MyWebviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWebviewController.swift; sourceTree = "<group>"; };
 		D35445171E3F732100967909 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
 		D38206E41E40A970000EB69E /* dam-td4-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "dam-td4-Bridging-Header.h"; sourceTree = "<group>"; };
 		D3AD31A41E3F6B4D000A4441 /* dam-td4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "dam-td4.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +97,7 @@
 				D3AD31B31E3F6B4D000A4441 /* Info.plist */,
 				D38206E41E40A970000EB69E /* dam-td4-Bridging-Header.h */,
 				D35445171E3F732100967909 /* CategoriesTableViewController.swift */,
+				D30917221E46006F00E337FC /* MyWebviewController.swift */,
 			);
 			path = "dam-td4";
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				D35445181E3F732100967909 /* CategoriesTableViewController.swift in Sources */,
 				D3AD31AA1E3F6B4D000A4441 /* ViewController.swift in Sources */,
 				373CF23D1E3F7E83003AE55C /* FormulaireViewController.swift in Sources */,
+				D30917231E46006F00E337FC /* MyWebviewController.swift in Sources */,
 				373CF23F1E3F8D5D003AE55C /* CategoriesCustoCell.swift in Sources */,
 				D3AD31A81E3F6B4D000A4441 /* AppDelegate.swift in Sources */,
 			);

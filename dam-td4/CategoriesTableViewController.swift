@@ -15,6 +15,8 @@ struct Element {
     var img: String
     var name: String
     var id_category: Int
+    var image_large: String
+    var descr: String
 }
 
 struct Category {
@@ -29,6 +31,9 @@ class CategoriesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "HOME"
+        //UINavigationBar.appearance().barTintColor = UIColor.red
         
         /*if let headerView = view as? UITableViewHeaderFooterView {
             headerView.textLabel?.textAlignment = .center
@@ -55,14 +60,15 @@ class CategoriesTableViewController: UITableViewController {
                             id: Int((elem.element?.attribute(by: "id")?.text)!)!,
                             img: (elem.element?.attribute(by: "image")?.text)!,
                             name: (elem.element?.attribute(by: "name")?.text)!,
-                            id_category: Int((elem.element?.attribute(by: "category_id")?.text)!)!)
+                            id_category: Int((elem.element?.attribute(by: "category_id")?.text)!)!,
+                            image_large: (elem.element?.attribute(by: "image_large")?.text)!,
+                            descr: (elem.element?.attribute(by: "descr")?.text)!)
                         
                         tmpElement.append(element) // ajoute l'objet element au tableau d'éléments
                     }
                     
                     category.elements = tmpElement
                     categories.append(category) // ajoute l'objet category au tableau de catégories
-                    
                 }
             }
         }
@@ -106,6 +112,24 @@ class CategoriesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return categories[section].name
+    }
+    
+    // clique sur une cellule
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        /*if categories[indexPath.section].elements[indexPath.row].image_large != "" {
+            imageView1.backgroundColor = UIColor.black
+            self.imageView1.image = UIImage(named: "pandaroux")
+            imageView1.contentMode = .scaleAspectFit
+        }*/
+        
+        print("on click")
+        
+        let web = self.storyboard?.instantiateViewController(withIdentifier: "MyWebView") as! MyWebviewController
+        web.nameElement = categories[indexPath.section].elements[indexPath.row].name
+        web.descrElement = categories[indexPath.section].elements[indexPath.row].descr
+        web.image = categories[indexPath.section].elements[indexPath.row].image_large
+        self.navigationController?.pushViewController(web, animated: true)
     }
     
     /*func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
