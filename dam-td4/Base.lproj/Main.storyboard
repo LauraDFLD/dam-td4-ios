@@ -235,18 +235,25 @@
                         <subviews>
                             <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1f-wy-En2">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OOG-NT-bcZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="OOG-NT-bcZ" firstAttribute="bottom" secondItem="S4F-Ic-VYt" secondAttribute="top" id="4Xk-fC-Jww"/>
                             <constraint firstItem="d1f-wy-En2" firstAttribute="bottom" secondItem="S4F-Ic-VYt" secondAttribute="top" id="Wm2-Vc-uN5"/>
+                            <constraint firstItem="OOG-NT-bcZ" firstAttribute="leading" secondItem="d1f-wy-En2" secondAttribute="leading" id="XoT-Ui-lfL"/>
                             <constraint firstItem="d1f-wy-En2" firstAttribute="top" secondItem="FfS-cK-ySb" secondAttribute="top" id="f0F-g3-LFj"/>
                             <constraint firstItem="d1f-wy-En2" firstAttribute="leading" secondItem="FfS-cK-ySb" secondAttribute="leading" id="h0Z-Ha-qNH"/>
+                            <constraint firstItem="OOG-NT-bcZ" firstAttribute="trailing" secondItem="d1f-wy-En2" secondAttribute="trailing" id="q6G-3A-zNI"/>
                             <constraint firstAttribute="trailing" secondItem="d1f-wy-En2" secondAttribute="trailing" id="tll-hx-xOf"/>
+                            <constraint firstItem="OOG-NT-bcZ" firstAttribute="top" secondItem="d1f-wy-En2" secondAttribute="top" id="wJ2-Ou-ATd"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageView2" destination="OOG-NT-bcZ" id="J6l-QS-1sS"/>
                         <outlet property="webView" destination="d1f-wy-En2" id="2fq-wR-amk"/>
                     </connections>
                 </viewController>

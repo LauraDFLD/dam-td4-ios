@@ -18,6 +18,8 @@ class MyWebviewController: UIViewController {
     var descrElement: String = ""
     var image: String = ""
 
+    @IBOutlet weak var imageView2: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,11 +28,15 @@ class MyWebviewController: UIViewController {
         // titre de la webview
         self.title = self.nameElement
         
-        /*if categories[indexPath.section].elements[indexPath.row].image_large != "" {
-         imageView1.backgroundColor = UIColor.black
-         self.imageView1.image = UIImage(named: "pandaroux")
-         imageView1.contentMode = .scaleAspectFit
-         }*/
+        if image != "" {
+            print(image)
+            imageView2.backgroundColor = UIColor.black
+            imageView2.sd_setImage(with: URL(string: image), placeholderImage: UIImage(named: "univers.png"))
+            imageView2.contentMode = .scaleAspectFit
+        }
+        else {
+            webView.loadHTMLString(descrElement, baseURL: nil)
+        }
 
     }
 
