@@ -32,23 +32,15 @@ class CategoriesTableViewController: UITableViewController {
     @IBAction func formButtonAction(_ sender: Any) {
         let formulaire = self.storyboard?.instantiateViewController(withIdentifier: "formulaireView") as! FormulaireViewController
         self.navigationController?.pushViewController(formulaire, animated: true)
-        
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "HOME"
-        //UINavigationBar.appearance().barTintColor = UIColor.red
-        
-        /*if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.textAlignment = .center
-        }*/
-        
-        //tableView.reloadData()
+        self.title = "HOME" // titre de la page
         
         // récupération de la langue du systeme
         let lang = NSLocale.current.languageCode
-        //print(lang!)
         
         if let url = URL(string: "http://fairmont.lanoosphere.com/mobile/getdata?lang=" + lang!) {
             if let data = try? Data(contentsOf: url) {
@@ -80,9 +72,6 @@ class CategoriesTableViewController: UITableViewController {
                 }
             }
         }
-        
-        //print(categories[1].elements.count)
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,79 +107,46 @@ class CategoriesTableViewController: UITableViewController {
     }
     
     /*override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         return categories[section].name
     }*/
     
-    // permet de centrer et personnaliser le header
+    // permet de personnaliser le header des sections
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let rect = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)
-        let footerView = UIView(frame:rect)
-        footerView.backgroundColor = UIColor.white
+        let view = UIView() // créé la vue
+        view.backgroundColor = UIColor.white // fond blanc
         
-        let label: UILabel = UILabel()
-        label.text = categories[section].name
-        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        let label: UILabel = UILabel() // créé un label
+        label.frame = CGRect(x: 0, y: 0, width: Int(tableView.frame.size.width), height: 40) // défini sa taille
+        label.text = categories[section].name // lui donne un titre
+        label.font = UIFont.boldSystemFont(ofSize: 18.0) // défini taille du texte et met en gras
+        label.textAlignment = NSTextAlignment.center // centre le texte
+        label.textColor = UIColor.black // couleur de texte noir
         
-        label.textAlignment = NSTextAlignment.center
+        view.addSubview(label) // ajoute le label à la vue
 
-        return label
+        return view // retourne la vue
     }
     
+    //  défini la hauteur du titre : obligatoire pour qu'il s'affiche
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
     
-    /*override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let  headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell") as! CategoriesCustoCell
-        headerCell.backgroundColor = UIColor.cyan
-        
-        headerCell.text = "Europe";
-        
-        return headerCell
-    }*/
     
     // clique sur une cellule
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        /*if categories[indexPath.section].elements[indexPath.row].image_large != "" {
-            imageView1.backgroundColor = UIColor.black
-            self.imageView1.image = UIImage(named: "pandaroux")
-            imageView1.contentMode = .scaleAspectFit
-        }*/
-        
-        print("on click")
-        
+        // instantie la webview
         let web = self.storyboard?.instantiateViewController(withIdentifier: "MyWebView") as! MyWebviewController
+        
+        // défini et renseigne les variables de mywebviewcontroller à passer à la vue
         web.nameElement = categories[indexPath.section].elements[indexPath.row].name
         web.descrElement = categories[indexPath.section].elements[indexPath.row].descr
         web.image = categories[indexPath.section].elements[indexPath.row].image_large
+        
+        // push à la webview grace au controller
         self.navigationController?.pushViewController(web, animated: true)
     }
-    
-    /*func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
-        var title = UILabel()
-        title.font = UIFont(name: "HelveticaNeue-Light", size: 12)!
-        title.textColor = UIColor.black
-        
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font=title.font
-        header.textLabel?.textColor=title.textColor
-        header.backgroundView?.backgroundColor = UIColor.white
-        
-    }*/
-    
-    /*func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
-    {
-        let label: UILabel = UILabel()
-        label.text = categories[section].name
-        
-        label.textAlignment = NSTextAlignment.center
-        headerView.addSubview(label)
-        
-        return label
-    }*/
     
 }
