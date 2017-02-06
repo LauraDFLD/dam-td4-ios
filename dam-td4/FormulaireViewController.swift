@@ -19,31 +19,39 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
     
     @IBAction func envoyerAction(_ sender: Any) {
         
-        let mailVC = MFMailComposeViewController()
         
-        let messageBody = "Nom:\(nomFormOutlet.text!)\nPrénom:\(prenomFormOutlet.text!)\nEmail:\(emailFormOutlet.text!)\nTéléphone:\(telFormOutlet.text!)\nEtre rappelé:\(rappelerSwitch.isOn) "
+        let alertController = UIAlertController(title: "Attention", message:
+            "Vous n'avez pas rempli tous les champs", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
         
-        mailVC.mailComposeDelegate = self
-        mailVC.setToRecipients([])
-        mailVC.setSubject("Ma demande de contact")
-        mailVC.setMessageBody(messageBody, isHTML: false)
+        self.present(alertController, animated: true, completion: nil)
         
-        print(messageBody)
-        
-        if !MFMailComposeViewController.canSendMail() {
-            print("Mail services are not available")
-            return
+        if (nomFormOutlet.text?.isEmpty)! || (prenomFormOutlet.text?.isEmpty)! || (emailFormOutlet.text?.isEmpty)! || telFormOutlet.text?.isEmpty ?? true {
+            
+            let alertController = UIAlertController(title: "Attention", message:
+                "Vous n'avez pas rempli tous les champs", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
         }
-        else{
-            present(mailVC, animated: true, completion: nil)
-        }
-        
-        
-        
-        if nomFormOutlet.text?.isEmpty ?? true {
-            print("textField is empty")
-        } else {
-            print("textField has some text")
+        else {
+            let mailVC = MFMailComposeViewController()
+            
+            let messageBody = "Nom:\(nomFormOutlet.text!)\nPrénom:\(prenomFormOutlet.text!)\nEmail:\(emailFormOutlet.text!)\nTéléphone:\(telFormOutlet.text!)\nEtre rappelé:\(rappelerSwitch.isOn) "
+            
+            mailVC.mailComposeDelegate = self
+            mailVC.setToRecipients([])
+            mailVC.setSubject("Ma demande de contact")
+            mailVC.setMessageBody(messageBody, isHTML: false)
+            
+            print(messageBody)
+            
+            if !MFMailComposeViewController.canSendMail() {
+                print("Mail services are not available")
+                return
+            }
+            else{
+                present(mailVC, animated: true, completion: nil)
+            }
+
         }
 
         
@@ -54,6 +62,19 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FormulaireViewController.dismissKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {
