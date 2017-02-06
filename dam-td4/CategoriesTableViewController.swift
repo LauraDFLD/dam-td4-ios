@@ -29,6 +29,8 @@ class CategoriesTableViewController: UITableViewController {
     
     var categories = [Category]() // tableau de catégories
 
+    @IBAction func formButtonAction(_ sender: Any) {
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,8 +43,11 @@ class CategoriesTableViewController: UITableViewController {
         
         //tableView.reloadData()
         
+        // récupération de la langue du systeme
+        let lang = NSLocale.current.languageCode
+        //print(lang!)
         
-        if let url = URL(string: "http://fairmont.lanoosphere.com/mobile/getdata?lang=en") {
+        if let url = URL(string: "http://fairmont.lanoosphere.com/mobile/getdata?lang=" + lang!) {
             if let data = try? Data(contentsOf: url) {
                 let xml = SWXMLHash.parse(data)
                 for cat in xml["data"]["categories"]["category"] { // parser les catégories
@@ -113,6 +118,18 @@ class CategoriesTableViewController: UITableViewController {
         
         return categories[section].name
     }
+    
+    // permet de centrer et personnaliser le header
+    //override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        //let label: UILabel = UILabel()
+        //titleSection. = categories[section].name
+        
+        //titleSection.textAlignment = NSTextAlignment.center
+
+        
+        //return titleSection
+    //}
     
     // clique sur une cellule
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
