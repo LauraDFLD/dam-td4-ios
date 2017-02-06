@@ -11,6 +11,7 @@ import MessageUI
 
 class FormulaireViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
+    //fonction de vérification de l'email
     func validateEmail(enteredEmail:String) -> Bool {
         
         let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -32,20 +33,18 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
     
     @IBAction func envoyerAction(_ sender: Any) {
         
-        //Vérification des champs du formulaire
+        //Vérification si tous les champs du formulaire sont remplis
         if (nomFormOutlet.text?.isEmpty)! || (prenomFormOutlet.text?.isEmpty)! || (emailFormOutlet.text?.isEmpty)! || telFormOutlet.text?.isEmpty ?? true {
-            
-            
             
             let alertController = UIAlertController(title: "Attention", message:
                 "Vous n'avez pas rempli tous les champs", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
             
             self.present(alertController, animated: true, completion: nil)
-            
-            
+        
         }
         else {
+            //Vérification que le nom fait au moins 5 caractères
             if ((nomFormOutlet.text?.characters.count)! < 5 ){
                 let alertValidNom = UIAlertController(title: "Attention", message:
                     "Le nom doit avoir au moins 5 caractères", preferredStyle: UIAlertControllerStyle.alert)
@@ -53,6 +52,7 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
                 
                 self.present(alertValidNom, animated: true, completion: nil)
             }
+                //Vérification que le prénom fait au moins 5 caractères
             else if ((prenomFormOutlet.text?.characters.count)! < 5 ){
                 let alertValidPrenom = UIAlertController(title: "Attention", message:
                     "Le prénom doit avoir au moins 5 caractères", preferredStyle: UIAlertControllerStyle.alert)
@@ -60,9 +60,14 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
                 
                 self.present(alertValidPrenom, animated: true, completion: nil)
             }
-            /*else if (){
+                //Vérification que le numéro de téléphone fait 10 caractères et est bien numérique
+            else if  ((telFormOutlet.text?.characters.count)! <= 10) {
+                let alertValidTel = UIAlertController(title: "Attention", message:
+                    "Le numéro de téléphone doit avoir 10 caractères", preferredStyle: UIAlertControllerStyle.alert)
+                alertValidTel.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
                 
-            }*/
+                self.present(alertValidTel, animated: true, completion: nil)
+                }
 
             //Verification du format de l'adresse email
             else if validateEmail(enteredEmail: emailFormOutlet.text!) == false {
@@ -74,39 +79,33 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
             }
             else{
             
-            //Creation de la vue email
-            let mailVC = MFMailComposeViewController()
+                //Creation de la vue email
+                let mailVC = MFMailComposeViewController()
             
-            //Corps du mail
-            /*let messageBody = "Nom:\(nomFormOutlet.text!)\nPrénom:\(prenomFormOutlet.text!)\nEmail:\(emailFormOutlet.text!)\nTéléphone:\(telFormOutlet.text!)\nEtre rappelé:\(rappelerSwitch.isOn) "*/
+                //Corps du mail
             
-            let messageBody = "<p><b><u>Nom:</u></b>\(nomFormOutlet.text!)<p> <p><b><u>Prénom:</u></b>\(prenomFormOutlet.text!)<p> <p><b><u>Email:</u></b>\(emailFormOutlet.text!)<p> <p><b><u>Téléphone:</u></b>\(telFormOutlet.text!)<p> <p><b><u>Etre rappelé:</u></b>\(rappelerSwitch.isOn)<p>"
             
-            //Ajout des différents champs de l'email
-            mailVC.mailComposeDelegate = self
-            mailVC.setToRecipients([])
-            mailVC.setSubject("Ma demande de contact")
-            mailVC.setMessageBody(messageBody, isHTML: true)
+                let messageBody = "<p><b><u>Nom: </u></b>\(nomFormOutlet.text!)<p> <p><b><u>Prénom: </u></b>\(prenomFormOutlet.text!)<p> <p><b><u>Email: </u></b>\(emailFormOutlet.text!)<p> <p><b><u>Téléphone: </u></b>\(telFormOutlet.text!)<p> <p><b><u>Etre rappelé: </u></b>\(rappelerSwitch.isOn)<p>"
             
-            print(messageBody)
+                //Ajout des différents champs de l'email
+                mailVC.mailComposeDelegate = self
+                mailVC.setToRecipients([])
+                mailVC.setSubject("Ma demande de contact")
+                mailVC.setMessageBody(messageBody, isHTML: true)
             
-            //Pour eviter pb emulateur
-            if !MFMailComposeViewController.canSendMail() {
-                print("Mail services are not available")
-                return
+                print(messageBody)
+            
+                //Pour eviter pb emulateur
+                if !MFMailComposeViewController.canSendMail() {
+                    print("Mail services are not available")
+                    return
+                }
+                else{
+                    //Fait apparaitre l'appli mail dans une sous vue
+                    present(mailVC, animated: true, completion: nil)
+                }
             }
-            else{
-                //Fait apparaitre l'appli mail dans une sous vue
-                present(mailVC, animated: true, completion: nil)
-            }
-            }
-            
-            
-           
-
         }
-
-        
     }
     
 
@@ -120,6 +119,8 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
         
         //Ajout de la reconnaissance du geste à la vue
         view.addGestureRecognizer(tap)
+        
+        
     }
     
     //Fonction qui permet de faire disparaitre le clavier
