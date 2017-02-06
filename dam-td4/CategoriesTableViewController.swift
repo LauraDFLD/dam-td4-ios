@@ -30,6 +30,9 @@ class CategoriesTableViewController: UITableViewController {
     var categories = [Category]() // tableau de catégories
 
     @IBAction func formButtonAction(_ sender: Any) {
+        let formulaire = self.storyboard?.instantiateViewController(withIdentifier: "formulaireView") as! FormulaireViewController
+        self.navigationController?.pushViewController(formulaire, animated: true)
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

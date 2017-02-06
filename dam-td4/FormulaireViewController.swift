@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class FormulaireViewController: UIViewController {
+class FormulaireViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var nomFormOutlet: UITextField!
     @IBOutlet weak var prenomFormOutlet: UITextField!
@@ -17,6 +18,35 @@ class FormulaireViewController: UIViewController {
     @IBOutlet weak var rappelerSwitch: UISwitch!
     
     @IBAction func envoyerAction(_ sender: Any) {
+        
+        let mailVC = MFMailComposeViewController()
+        
+        let messageBody = "Nom:\(nomFormOutlet.text!)\nPrénom:\(prenomFormOutlet.text!)\nEmail:\(emailFormOutlet.text!)\nTéléphone:\(telFormOutlet.text!)\nEtre rappelé:\(rappelerSwitch.isOn) "
+        
+        mailVC.mailComposeDelegate = self
+        mailVC.setToRecipients([])
+        mailVC.setSubject("Ma demande de contact")
+        mailVC.setMessageBody(messageBody, isHTML: false)
+        
+        print(messageBody)
+        
+        if !MFMailComposeViewController.canSendMail() {
+            print("Mail services are not available")
+            return
+        }
+        else{
+            present(mailVC, animated: true, completion: nil)
+        }
+        
+        
+        
+        if nomFormOutlet.text?.isEmpty ?? true {
+            print("textField is empty")
+        } else {
+            print("textField has some text")
+        }
+
+        
     }
     
 

@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>SWXMLHash.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,12 +22,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2080B8A679AB4A4D3FEB85E41A0E98C2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4891F0F202377759925888D13555B1A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>75737C588AD89E1C69E7515238698CD6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AA2648E7E1494AD991BE080B7061EEA1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE83553E63B54C191BDDC466B4EC4AAF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
