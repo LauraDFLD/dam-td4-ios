@@ -11,6 +11,19 @@ import MessageUI
 
 class FormulaireViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
+    func validateEmail(enteredEmail:String) -> Bool {
+        
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: enteredEmail)
+        
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
+        return string.rangeOfCharacter(from: invalidCharacters, options: [], range: string.startIndex ..< string.endIndex) == nil
+    }
+    
     @IBOutlet weak var nomFormOutlet: UITextField!
     @IBOutlet weak var prenomFormOutlet: UITextField!
     @IBOutlet weak var emailFormOutlet: UITextField!
@@ -22,13 +35,45 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
         //Vérification des champs du formulaire
         if (nomFormOutlet.text?.isEmpty)! || (prenomFormOutlet.text?.isEmpty)! || (emailFormOutlet.text?.isEmpty)! || telFormOutlet.text?.isEmpty ?? true {
             
+            
+            
             let alertController = UIAlertController(title: "Attention", message:
                 "Vous n'avez pas rempli tous les champs", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
             
             self.present(alertController, animated: true, completion: nil)
+            
+            
         }
         else {
+            if ((nomFormOutlet.text?.characters.count)! < 5 ){
+                let alertValidNom = UIAlertController(title: "Attention", message:
+                    "Le nom doit avoir au moins 5 caractères", preferredStyle: UIAlertControllerStyle.alert)
+                alertValidNom.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+                
+                self.present(alertValidNom, animated: true, completion: nil)
+            }
+            else if ((prenomFormOutlet.text?.characters.count)! < 5 ){
+                let alertValidPrenom = UIAlertController(title: "Attention", message:
+                    "Le prénom doit avoir au moins 5 caractères", preferredStyle: UIAlertControllerStyle.alert)
+                alertValidPrenom.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+                
+                self.present(alertValidPrenom, animated: true, completion: nil)
+            }
+            /*else if (){
+                
+            }*/
+
+            //Verification du format de l'adresse email
+            else if validateEmail(enteredEmail: emailFormOutlet.text!) == false {
+                let alertValidEmail = UIAlertController(title: "Attention", message:
+                    "L'email rentré n'est pas au bon format", preferredStyle: UIAlertControllerStyle.alert)
+                alertValidEmail.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+                
+                self.present(alertValidEmail, animated: true, completion: nil)
+            }
+            else{
+            
             //Creation de la vue email
             let mailVC = MFMailComposeViewController()
             
@@ -54,6 +99,10 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
                 //Fait apparaitre l'appli mail dans une sous vue
                 present(mailVC, animated: true, completion: nil)
             }
+            }
+            
+            
+           
 
         }
 
