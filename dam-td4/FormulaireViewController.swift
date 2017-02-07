@@ -11,19 +11,6 @@ import MessageUI
 
 class FormulaireViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    //fonction de vérification de l'email
-    func validateEmail(enteredEmail:String) -> Bool {
-        
-        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
-        return emailPredicate.evaluate(with: enteredEmail)
-        
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let invalidCharacters = CharacterSet(charactersIn: "0123456789").inverted
-        return string.rangeOfCharacter(from: invalidCharacters, options: [], range: string.startIndex ..< string.endIndex) == nil
-    }
     
     @IBOutlet weak var nomFormOutlet: UITextField!
     @IBOutlet weak var prenomFormOutlet: UITextField!
@@ -61,14 +48,14 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
                 self.present(alertValidPrenom, animated: true, completion: nil)
             }
                 //Vérification que le numéro de téléphone fait 10 caractères et est bien numérique
-            else if  ((telFormOutlet.text?.characters.count)! <= 10) {
-                let alertValidTel = UIAlertController(title: "Attention", message:
-                    "Le numéro de téléphone doit avoir 10 caractères", preferredStyle: UIAlertControllerStyle.alert)
-                alertValidTel.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+            else if validateTel(value: telFormOutlet.text!) == false {
+                let alertValidEmail = UIAlertController(title: "Attention", message:
+                    "Le numéro de téléphone doit avoir 10 caractères et doit seulement comporter des chiffres", preferredStyle: UIAlertControllerStyle.alert)
+                alertValidEmail.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
                 
-                self.present(alertValidTel, animated: true, completion: nil)
-                }
-
+                self.present(alertValidEmail, animated: true, completion: nil)
+            }
+                
             //Verification du format de l'adresse email
             else if validateEmail(enteredEmail: emailFormOutlet.text!) == false {
                 let alertValidEmail = UIAlertController(title: "Attention", message:
@@ -83,7 +70,6 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
                 let mailVC = MFMailComposeViewController()
             
                 //Corps du mail
-            
             
                 let messageBody = "<p><b><u>Nom: </u></b>\(nomFormOutlet.text!)<p> <p><b><u>Prénom: </u></b>\(prenomFormOutlet.text!)<p> <p><b><u>Email: </u></b>\(emailFormOutlet.text!)<p> <p><b><u>Téléphone: </u></b>\(telFormOutlet.text!)<p> <p><b><u>Etre rappelé: </u></b>\(rappelerSwitch.isOn)<p>"
             
@@ -111,6 +97,12 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Ajoute la croix pour effacer le texte des champs
+        nomFormOutlet.clearButtonMode = .whileEditing
+        prenomFormOutlet.clearButtonMode = .whileEditing
+        telFormOutlet.clearButtonMode = .whileEditing
+        emailFormOutlet.clearButtonMode = .whileEditing
 
         
         //Reconnait le tap ou doubletap
@@ -143,5 +135,22 @@ class FormulaireViewController: UIViewController, MFMailComposeViewControllerDel
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //fonction de vérification de l'email
+    func validateEmail(enteredEmail:String) -> Bool {
+        
+        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
+        return emailPredicate.evaluate(with: enteredEmail)
+        
+    }
+    
+    //fonction de vérification du numéro de téléphone
+    func validateTel(value: String) -> Bool {
+        let PHONE_REGEX = "^\\d{3}-\\d{3}-\\d{4}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: value)
+        return result
+    }
 
 }
